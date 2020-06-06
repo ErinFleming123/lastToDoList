@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 300;
+  font-size: 1.5rem;
+  background-color: #008cff;
+  color: white;
+
+  display: grid;
+  grid:
+    "header header header header" auto
+    "..... lists active....." auto/
+    1fr minmax(100px, 300px) minmax(250px, 500px);
+  }
+
+  .title {
+    grid-area: header;
+  }
+
+  .all-tasks {
+    grid-area: lists;
+  }
+
+  .todo-list {
+    grid-area: active;
+  }
