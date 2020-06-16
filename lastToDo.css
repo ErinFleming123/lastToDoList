@@ -1,16 +1,27 @@
+:root {
+  --clr-primary: rgb(54, 112, 199);
+  --clr-light: #f4f4f4;
+  --clr-dark: #333;
+  --clear-warning: rgb(999, 36, 36);
+}
+
+*, 
+*::before, 
+*::after {
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: "Work Sans", sans-serif;
   font-weight: 300;
   font-size: 1.5rem;
-  background-color: #008cff;
-  color: white;
+  background-color: var(--clr-primary);
+  color: var(--clr-light);
 
   display: grid;
-  grid:
-    "header header header header" auto
-    "..... lists active....." auto/
-    1fr minmax(100px, 300px) minmax(250px, 500px);
+  grid: "header header header header" auto "..... lists active....." auto/1fr minmax(100px, 300px) 1fr;(250px, 500px);
   }
 
   .title {
@@ -28,17 +39,20 @@ body {
   }
 
   .task-list {
+    font-size: 1.2rem;
     line-height: 1.7;
     list-style: circle;
     padding-left: 1.1em;
   }
+
+  
 
   .list-name {
     cursor: pointer;
   }
 
   .list-name:hover {
-    opacity: .7;
+    opacity: 0.7;
   }
 
   form {
@@ -51,19 +65,30 @@ body {
     border: 0;
     padding: 0;
     color: inherit;
-
+    
   }
 
   .btn.create {
     font-size: 1.5rem;
     font-weight: 900;
     margin-right: 0.25em;
-    transition: opacity 150ms ease-in;
+    transition: opacity 250ms ease-in;
   }
 
-  .btn.list:hover {
+  .btn.create:hover {
     opacity: 0.7;
   }
+
+  .btn.delete {
+    opacity: 0.7;
+    font-size: 1rem;
+    transition: color 200ms;
+  }
+  .btn.delete:hover {
+    color: var(--clr-warning);
+  }
+
+
 
   .new {
     background: transparent;
@@ -72,20 +97,46 @@ body {
     border-bottom: 1px solid currentColor;
     font-size: inherit;
     outline: none;
-
-    transition: border-bottom 250ms ease-in;
+    padding: 0.25em;
+    transition: border-bottom 150ms ease-in;
     order: 2;
   }
-
-  .new:focus {
-    border-bottom-width: 3px;
-  }
-  .new:focus::placeholder {
-    opacity: 0.2;
+  .new::-webkit-input-placeholder {
+    opacity: 0.4;
   }
 
-  .new.list {
-    font-size: 1.1rem;
+  .new::-ms-input-placeholder {
+    opacity: 0.4;
+  }
+  .new::placeholder {
+    opacity: 0.4;
+  }
+
+
+
+.new:focus {
+  border-bottom-width: 3px;
+} 
+
+.new:focus::-webkit-input-placeholder {
+  opacity: 0.15;
+}
+
+.new:focus:-ms-input-placeholder {
+  opacity: 0.15;
+}
+.new:focus::-ms-input-placeholder {
+  opacity: 0.15;
+}
+.new:focus::placeholder {
+  opacity: 0.15;
+}
+.new.list {
+  font-size: 1.1rem;
+}
+
+  .new.task {
+    margin-bottom: 0;
   }
 
   .active-list {
@@ -95,8 +146,8 @@ body {
   .todo-list {
     --spacer: 2em;
     grid-area: active;
-    background: white;
-    color: black;
+    background: var(--clr-light);
+    color: var(--clr-dark);
     
   }
 
@@ -110,6 +161,7 @@ body {
 
   .list-title {
     margin: 0 1em 0 0;
+    
   
   }
 
@@ -120,6 +172,12 @@ body {
 
   .todo-body {
     padding: var(--spacer);
+    position: relative;
+    
+  }
+
+  .new-task-creator .create {
+      color: var(--clr-primary);
   }
 
   [type="checkbox"] {
@@ -128,11 +186,9 @@ body {
   }
 
   .task label {
-    display: inline-flex;
+    display: flex-inline;
     align-items: center;
     position: relative;
-    
-    
   }
 
   .task {
@@ -151,27 +207,31 @@ body {
     opacity: .1;
   }
   .custom-checkbox {
-    --size: .75em;
+    --size: 0.75em;
     display: inline-block;
     width: var(--size);
     height: var(--size);
     margin-right: var(--size);
     cursor: pointer;
     border: 2px solid currentColor;
-    border-radius: 50%;
-    transform: scale(1);
-    transition: transform 200ms ease-in-out;
+    Border-radius: 50%;
+    --webkit-transform: scale(1);
+            transform: scale(1);
+    transition: -webkit-transform 300ms ease-in-out;
+    transition: transform 300ms ease-in-out;
+    transition: transform 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
   }
 
   .task:hover .custom-checkbox,
   [type="checkbox"]:focus + label .custom-checkbox {
-    transform: scale(1.2);
-    color: blue;
+    --webkit-transform: scale(1.2);
+             transform: scale(1.2);
+    color: var(--clr-primary);
   }
 
   [type="checkbox"]:checked + label .custom-checkbox {
-    background: blue;
-    border-color: blue;
+    background: var(--clr-primary);
+    border-color: var(--clr-primary);
     box-shadow: inset 0 0 0px 2px white;
   }
 
@@ -188,17 +248,35 @@ body {
     top: 50%;
     height: 3px;
     background: currentColor;
-    transform: scaleX(0);
-    transform-origin: right;
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+    -webkit-transform-origin: right;
+            transform-origin: right;
+    transition: -webkit-transform 150ms ease-in-out;
     transition: transform 150ms ease-in-out;
+    transition: transform 150ms ease-in-out, -webkit-transform 150ms ease-in-out;
+    
   }
 
   [type="checkbox"]:checked + label::after {
-    transform: scaleX(1);
-    transform-origin: left;
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+    -webkit-transform-origin: left;
+            transform-origin: left;
+  }
+  
+  .delete-stuff {
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -35px;
+    color: var(--clr-light);
+
   }
 
-
-
+  
+  
 
 
